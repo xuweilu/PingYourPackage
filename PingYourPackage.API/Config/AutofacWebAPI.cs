@@ -8,26 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-public class AutofacWebAPI
+namespace PingYourPackage.API.Config
 {
-    public static void Initialize(HttpConfiguration config)
+    public class AutofacWebAPI
     {
-        Initialize(config, RegisterServices(new ContainerBuilder()));
-    }
-    public static void Initialize(HttpConfiguration config, IContainer container)
-    {
-        config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-    }
-    private static IContainer RegisterServices(ContainerBuilder builder)
-    {
-        builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+        public static void Initialize(HttpConfiguration config)
+        {
+            Initialize(config, RegisterServices(new ContainerBuilder()));
+        }
+        public static void Initialize(HttpConfiguration config, IContainer container)
+        {
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+        }
+        private static IContainer RegisterServices(ContainerBuilder builder)
+        {
+            builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 
-        //registeration goes here
+            //registeration goes here
 
-        return builder.Build();
+            return builder.Build();
+        }
     }
+
 }
-//namespace PingYourPackage.API.Config
-//{
-
-//}
